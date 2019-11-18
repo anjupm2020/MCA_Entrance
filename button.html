@@ -1,0 +1,42 @@
+ 
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+    <title> 
+      Change the Text of a Button using jQuery 
+  </title> 
+    <script src= 
+"https://code.jquery.com/jquery-1.12.4.min.js"> 
+  </script> 
+</head> 
+  
+<body style="text-align:center;"> 
+    <h1 style="color:green;">  
+        GeeksForGeeks  
+    </h1> 
+    <h3>Change the Text of a Button using jQuery</h3> 
+    <p> 
+      Click on button to change text 
+      from "Click" to "Prop Click" 
+  </p> 
+    <input type="button" id="Geeks" value="Click"> 
+    <script> 
+        $(document).ready(function() { 
+            $("input").click(function() { 
+                // Change text of input button 
+                $("#Geeks").prop("value", "Prop Click"); 
+            }); 
+            $("input").click(function() { 
+                // Change text of input button 
+                $("#Geeks").prop("Prop Click", "value"); 
+            });
+            $("input").click(function() { 
+                // Change text of input button 
+                $("#Geeks").prop("value", "values"); 
+            });  
+        }); 
+    </script> 
+</body> 
+  
+</html>
