@@ -63,8 +63,8 @@ return false;
   
 
 
-<input type="text"  id="cat_name" name="cat_name" placeholder="Add Catogory" > <br>
-<input type="number" id="fee" name="fee" placeholder="Add Amount" > <br>
+<input type="text"  id="unv" name="unv" placeholder="Add University" > <br>
+<input type="text" id="place" name="place" placeholder="Add place" > <br>
 
 <input type="submit" name="submit" value="ADD" ><br>
  
@@ -72,9 +72,6 @@ return false;
 </form>
 </div>
 
-<!--  <?php
-include 'footer.html';
-?> -->
 
 
 <?php
@@ -85,19 +82,20 @@ if(isset($_POST['submit']))
   
 
 
-    $cat_name = $_POST['cat_name'];
-    $ss=mysqli_query($con,"select * from cat where cat_name='$cat_name'");
+    $unv = $_POST['unv'];
+    $place = $_POST['place'];
+    $ss=mysqli_query($con,"select * from unv where unv='$unv'");
   $i=mysqli_num_rows($ss);
   if($i>0)
   {
          echo "
         <script>
-        alert('This Catogory already exists');
+        alert('This University already exists');
         </script>";
   }
   else
   {
-     $sql = "INSERT INTO `cat`(`cat_name`,`fee`) VALUES ('$cat_name','$fee')";
+     $sql = "INSERT INTO `unv`(`unv`,`place`,`status`) VALUES ('$unv','$place',1)";
      if(mysqli_query($con, $sql)) {
   
          }
@@ -109,38 +107,42 @@ else{
 
     
     }
-?>   -->
+?>  
 
+
+<br><br><br>
 <center>
 <?php
-$select="SELECT * FROM `cat` where status=1 ";
+$select="SELECT * FROM `unv` where status=1 ";
 $res=mysqli_query($con,$select);
 ?>
-<table  width="80%">
+<table  width="50%" ">
   <tr>
-   <th width="10%">Id</th>
-    <th width="30%" >catogory</th>
-   
-  </tr>
+    <th>Id</th>
+    <th width="25%">University</th>
+    <th width="15%">Place</th>
+    <th>Action</th>
+  </tr><br><br><br>
+
 <?php
 while($row=mysqli_fetch_array($res))
 {
 
 ?>
-<tr>
-<td><?php echo $row['cat_id'];?></td>
-<td><?php echo $row['cat_name'];?></td>
 
+<tr>
+  <td><?php echo $row['uid'];?></td>
+<td><?php echo $row['unv'];?></td>
+<td><?php echo $row['place'];?></td>
 <td>
   
-<form action="deletecat.php " method="POST">
-    <input type="hidden" name="id" value="<?php echo $row['cat_id']; ?>"/>
+<form action="unvupdate.php " method="POST">
+    <input type="hidden" name="id" value="<?php echo $row['uid']; ?>"/>
     <input type="submit" value="Delete">
   </form>
 
 
   </td>
-
   
   
 
@@ -148,21 +150,19 @@ while($row=mysqli_fetch_array($res))
 <?php
 }
 ?>
-</table>
-
-
-
+</table></center>
 <?php
-$select="SELECT * FROM `cat` where status=0 ";
+$select="SELECT * FROM `unv` where status=0 ";
 $res=mysqli_query($con,$select);
 ?>
-<table  width="50%">
+<table  width="50%" style="margin-left:350px;">
   <tr>
    
-    <th width="10%" ></th>
+    <th width="" ></th>
     <th width="30%"></th>
      
       <th width="10%"></th>
+      <th></th>
   </tr>
 <?php
 while($row=mysqli_fetch_array($res))
@@ -170,16 +170,14 @@ while($row=mysqli_fetch_array($res))
 
 ?>
 <tr>
-<td><?php echo $row['cat_id'];?></td>
-<td><?php echo $row['cat_name'];?></td>
-
+<<td><?php echo $row['uid'];?></td>
+<td><?php echo $row['unv'];?></td>
+<td><?php echo $row['place'];?></td>
 <td>
-  <!-- <form action="delete.php " method="POST">
-    <input type="hidden" name="id" value="<?php echo $row['cen_id']; ?>"/>
-    <input type="submit" value="Delete">
-  </form> -->
-<form action="addcatstatus.php " method="POST">
-    <input type="hidden" name="id" value="<?php echo $row['cat_id']; ?>"/>
+<td>
+  
+<form action="addunvstatus.php " method="POST">
+    <input type="hidden" name="id" value="<?php echo $row['uid']; ?>"/>
     <input type="submit" value="ADD">
   </form>
 
